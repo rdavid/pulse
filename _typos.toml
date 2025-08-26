@@ -1,0 +1,4 @@
+# SPDX-FileCopyrightText: 2025 David Rabkin
+# SPDX-License-Identifier: 0BSD
+[default.extend-words]
+noet = "noet"

@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2025 David Rabkin
+# SPDX-License-Identifier: 0BSD
+FROM ubuntu:24.04
+LABEL maintainer=David\ Rabkin\ <david@rabkin.co.il>
+ENV \
+	BASE_REL=0.9.20250808 \
+	BASE_SRC=https://github.com/rdavid/shellbase/archive/refs/tags/v0.9.20250808.tar.gz \
+	SERVER_HOST=server \
+	SERVER_PORT=8888 \
+	TIME_ZONE=Asia/Jerusalem \
+	USER=client
+
+# hadolint ignore=DL3008,DL4006
+RUN \
+	apt-get update --assume-yes \
+	&& apt-get install --assume-yes --no-install-recommends \
+		ca-certificates \
+		curl \
+		netcat-openbsd \
+		tzdata \
+		wireless-tools \
+	&& apt-get clean \
+	&& rm -rf /var/lib/apt/lists/* \
+	&& useradd --create-home "$USER" \
+	&& cp /usr/share/zoneinfo/"$TIME_ZONE" /etc/localtime \
+	&& printf %s "$TIME_ZONE" > /etc/timezone \
+	&& curl --location --silent "$BASE_SRC" | \
+		tar \
+			--directory /usr/local/bin \
+			--extract \
+			--gzip \
+			--strip-components=2 \
+			shellbase-"$BASE_REL"/lib/base.sh
+COPY LICENSES/* /licenses/
+USER "$USER"
+WORKDIR /home/"$USER"
+COPY \
+	--chown="$USER":"$USER" \
+	app/client.sh .
+CMD ["./client.sh"]

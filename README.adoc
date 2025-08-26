@@ -1,0 +1,62 @@
+// Settings:
+:toc: macro
+:!toc-title:
+
+// URLs:
+:img-hoc: https://hitsofcode.com/github/rdavid/pulse?branch=master&label=hits%20of%20code
+:img-license: https://img.shields.io/github/license/rdavid/pulse?color=blue&labelColor=gray&logo=freebsd&logoColor=lightgray&style=flat
+:url-actionlint: https://github.com/rhysd/actionlint
+:url-cv: http://cv.rabkin.co.il
+:url-goredo: http://www.goredo.cypherpunks.su/Install.html
+:url-hadolint: https://github.com/hadolint/hadolint
+:url-hoc: https://hitsofcode.com/view/github/rdavid/pulse?branch=master
+:url-license: https://github.com/rdavid/pulse/blob/master/LICENSES/0BSD.txt
+:url-redo: http://cr.yp.to/redo.html
+:url-reuse: https://github.com/fsfe/reuse-action
+:url-shellbase: https://github.com/rdavid/shellbase
+:url-shellcheck: https://github.com/koalaman/shellcheck
+:url-shfmt: https://github.com/mvdan/sh
+:url-test: https://github.com/rdavid/pulse/actions/workflows/test.yml
+:url-typos: https://github.com/crate-ci/typos
+:url-yamllint: https://github.com/adrienverge/yamllint
+
+= Pulse
+
+image:{img-hoc}[hits of code,link={url-hoc}]
+image:{img-license}[license,link={url-license}]
+
+toc::[]
+
+== About
+
+Client Server network communication.
+
+== Build
+
+To build the image locally, start VM if needed `podman machine start`:
+
+[,sh]
+----
+git clone git@github.com:rdavid/pulse.git &&
+  cd ./pulse &&
+  podman build --file ./container/client/Containerfile --tag client . &&
+  podman build --file ./container/server/Containerfile --tag server .
+----
+
+== Test
+
+The project uses Daniel J. Bernstein's build system {url-redo}[`redo`].
+You can install Sergey Matveev's {url-goredo}[`goredo`] implementation.
+`redo lint` applies the following linters to the source files:
+{url-actionlint}[`actionlint`],
+{url-hadolint}[`hadolint`],
+{url-reuse}[`reuse`],
+{url-shellcheck}[`shellcheck`],
+{url-shfmt}[`shfmt`],
+{url-typos}[`typos`],
+{url-yamllint}[`yamllint`].
+
+== License
+
+`pulse` is copyright {url-cv}[David Rabkin] and available under a
+{url-license}[Zero-Clause BSD license].
