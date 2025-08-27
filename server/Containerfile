@@ -34,5 +34,4 @@ WORKDIR /home/"$USER"
 COPY \
 	--chown="$USER":"$USER" \
 	server/server.sh .
-EXPOSE 8888
 CMD ["./server.sh"]

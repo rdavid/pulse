@@ -11,15 +11,16 @@ services:
       - server
     environment:
       - SERVER_HOST=server
-      - SERVER_PORT=8888
-    image: rdavid/pulse-client:latest
+      - SERVER_PORT=8080
+    image: pulse-client:latest
     restart: unless-stopped
   server:
     build:
       context: .
       dockerfile: server/Containerfile
     environment:
-      - LISTEN_HOST=0.0.0.0
-      - LISTEN_PORT=8888
-    image: rdavid/pulse-server:latest
+      - LISTEN_PORT=8080
+    image: pulse-server:latest
+    ports:
+      - 8080:8080
     restart: unless-stopped
