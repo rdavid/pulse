@@ -6,7 +6,7 @@ services:
   client:
     build:
       context: .
-      dockerfile: container/client/Containerfile
+      dockerfile: client/Containerfile
     depends_on:
       - server
     image: rdavid/pulse-client:latest
@@ -14,6 +14,6 @@ services:
   server:
     build:
       context: .
-      dockerfile: container/server/Containerfile
+      dockerfile: server/Containerfile
     image: rdavid/pulse-server:latest
     restart: unless-stopped

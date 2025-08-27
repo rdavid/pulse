@@ -11,4 +11,6 @@ jobs:
       - uses: actions/checkout@v5
       - uses: ludeeus/action-shellcheck@master
         with:
-          additional_files: ./app/*.sh
+          additional_files: >
+            ./client/client.sh
+            ./server/server.sh

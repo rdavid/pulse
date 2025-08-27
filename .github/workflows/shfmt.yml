@@ -10,4 +10,4 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - uses: mfinelli/setup-shfmt@v4
-      - run: shfmt -d ./app/*.sh
+      - run: shfmt -d ./client/client.sh ./server/server.sh

@@ -18,7 +18,7 @@ jobs:
       - uses: redhat-actions/buildah-build@v2
         with:
           containerfiles: |
-            ./container/client/Containerfile
-            ./container/server/Containerfile
+            ./client/Containerfile
+            ./server/Containerfile
           image: pulse
           tags: latest

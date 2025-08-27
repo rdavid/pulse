@@ -36,5 +36,5 @@ USER "$USER"
 WORKDIR /home/"$USER"
 COPY \
 	--chown="$USER":"$USER" \
-	app/client.sh .
+	client/client.sh .
 CMD ["./client.sh"]

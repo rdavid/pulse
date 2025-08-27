@@ -33,6 +33,6 @@ USER "$USER"
 WORKDIR /home/"$USER"
 COPY \
 	--chown="$USER":"$USER" \
-	app/server.sh .
+	server/server.sh .
 EXPOSE 8888
 CMD ["./server.sh"]
