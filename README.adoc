@@ -40,10 +40,19 @@ To build the image locally, start VM if needed `podman machine start`:
 
 [,sh]
 ----
-git clone git@github.com:rdavid/pulse.git &&
-  cd ./pulse &&
-  podman build --file ./container/client/Containerfile --tag client . &&
-  podman build --file ./container/server/Containerfile --tag server .
+podman build --file ./container/client/Containerfile --tag client .
+podman build --file ./container/server/Containerfile --tag server .
+----
+
+To build and start the containers with Podman Compose:
+
+[,sh]
+----
+# Builds both images and start containers.
+podman-compose up --build
+
+# Stops and removes containers.
+podman-compose down
 ----
 
 == Test
