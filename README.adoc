@@ -32,7 +32,10 @@ toc::[]
 
 == About
 
-Client Server network communication.
+Pulse is a client-server network communication project.
+The project is implemented using POSIX-compliant Shell
+`Portable Operating System Interface for uniX`, and utilizes the Unix shell
+framework {url-shellbase}[`shellbase`].
 
 == Build
 
