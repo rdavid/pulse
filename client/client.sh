@@ -16,7 +16,7 @@ readonly \
 main() {
 	local i=0
 	while :; do
-		log Connect to "$SERVER_HOST":"$SERVER_PORT" "$i".
+		log "$(whoami)" "$SERVER_HOST":"$SERVER_PORT" "$i".
 		sleep 5
 		i=$((i + 1))
 	done

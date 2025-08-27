@@ -36,23 +36,21 @@ Client Server network communication.
 
 == Build
 
-To build the image locally, start VM if needed `podman machine start`:
-
-[,sh]
-----
-podman build --file ./client/Containerfile --tag client .
-podman build --file ./server/Containerfile --tag server .
-----
-
 To build and start the containers with Podman Compose:
 
 [,sh]
 ----
+# Starts VM.
+podman machine start
+
 # Builds both images and start containers.
 podman-compose up --build
 
 # Stops and removes containers.
 podman-compose down
+
+# Stops VM.
+podman machine stop
 ----
 
 == Test

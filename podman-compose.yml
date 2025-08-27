@@ -9,11 +9,17 @@ services:
       dockerfile: client/Containerfile
     depends_on:
       - server
+    environment:
+      - SERVER_HOST=server
+      - SERVER_PORT=8888
     image: rdavid/pulse-client:latest
     restart: unless-stopped
   server:
     build:
       context: .
       dockerfile: server/Containerfile
+    environment:
+      - LISTEN_HOST=0.0.0.0
+      - LISTEN_PORT=8888
     image: rdavid/pulse-server:latest
     restart: unless-stopped

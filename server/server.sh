@@ -16,7 +16,7 @@ readonly \
 main() {
 	local i=0
 	while :; do
-		log Server "$i".
+		log "$(whoami)" "$LISTEN_HOST":"$LISTEN_PORT" "$i".
 		sleep 5
 		i=$((i + 1))
 	done
