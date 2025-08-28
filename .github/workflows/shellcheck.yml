@@ -12,5 +12,5 @@ jobs:
       - uses: ludeeus/action-shellcheck@master
         with:
           additional_files: >
-            ./client/client.sh
-            ./server/server.sh
+            ./client/client
+            ./server/server
