@@ -3,11 +3,11 @@
 :!toc-title:
 
 // URLs:
-:img-build: https://github.com/rdavid/pulse/actions/workflows/build.yml/badge.svg
 :img-hoc: https://hitsofcode.com/github/rdavid/pulse?branch=master&label=hits%20of%20code
 :img-license: https://img.shields.io/github/license/rdavid/pulse?color=blue&labelColor=gray&logo=freebsd&logoColor=lightgray&style=flat
+:img-test-lnx: https://github.com/rdavid/pulse/actions/workflows/test-lnx.yml/badge.svg
+:img-test-mac: https://github.com/rdavid/pulse/actions/workflows/test-mac.yml/badge.svg
 :url-actionlint: https://github.com/rhysd/actionlint
-:url-build: https://github.com/rdavid/pulse/actions/workflows/build.yml
 :url-cv: http://cv.rabkin.co.il
 :url-goredo: http://www.goredo.cypherpunks.su/Install.html
 :url-hadolint: https://github.com/hadolint/hadolint
@@ -18,13 +18,15 @@
 :url-shellbase: https://github.com/rdavid/shellbase
 :url-shellcheck: https://github.com/koalaman/shellcheck
 :url-shfmt: https://github.com/mvdan/sh
-:url-test: https://github.com/rdavid/pulse/actions/workflows/test.yml
+:url-test-lnx: https://github.com/rdavid/pulse/actions/workflows/test-lnx.yml
+:url-test-mac: https://github.com/rdavid/pulse/actions/workflows/test-mac.yml
 :url-typos: https://github.com/crate-ci/typos
 :url-yamllint: https://github.com/adrienverge/yamllint
 
 = Pulse
 
-image:{img-build}[build,link={url-build}]
+image:{img-test-lnx}[test lnx,link={url-test-lnx}]
+image:{img-test-mac}[test mac,link={url-test-mac}]
 image:{img-hoc}[hits of code,link={url-hoc}]
 image:{img-license}[license,link={url-license}]
 
