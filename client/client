@@ -16,7 +16,8 @@ readonly \
 	SERVER_PORT="${SERVER_PORT:-8080}"
 . base.sh
 
-# Listens serever for a killing signal.
+# Listens for a killing signal in a separate process and terminates the
+# parent process when received.
 listens() {
 	local dad="$$"
 	(
