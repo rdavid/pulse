@@ -11,17 +11,37 @@
 readonly \
 	BASE_APP_VERSION=0.9.20250828 \
 	INTERVAL=5 \
+	LISTEN_PORT="${LISTEN_PORT:-9090}" \
 	SERVER_HOST="${SERVER_HOST:-server}" \
 	SERVER_PORT="${SERVER_PORT:-8080}"
 . base.sh
 
+# Listens serever for a killing signal.
+listens() {
+	local dad="$$"
+	(
+		local lne
+		while :; do
+			nc -l -p "$LISTEN_PORT" | {
+				IFS= read -r lne
+				[ "$lne" = die ] && {
+					log Killed in action!
+					kill -- -$dad
+				}
+				log Got "$lne".
+			}
+			sleep 1
+		done
+	) &
+}
+
 # Sends data to the server every INTERVAL seconds.
-loop() {
+sendd() {
 	local cnt=0 lne msg
 	while :; do
 		lne="$(prettyuptime)"
 		msg="$(printf %s\\n "$lne" | nc 2>&1 "$SERVER_HOST" "$SERVER_PORT")" ||
-			loge E "$msg"
+			loge "$msg"
 		cnt=$((cnt + 1))
 		log "Sent $cnt times, wait for ${INTERVAL}s."
 		sleep "$INTERVAL"
@@ -31,8 +51,9 @@ loop() {
 # Validates and sends data in a loop.
 main() {
 	validate_cmd nc
+	listens
 	log "$(whoami)" is sending data to "$SERVER_HOST":"$SERVER_PORT".
-	loop
+	sendd
 }
 
 # Starting point.

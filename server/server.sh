@@ -10,11 +10,23 @@
 # shellcheck disable=SC1091,SC2034 # File not following, variable unused.
 readonly \
 	BASE_APP_VERSION=0.9.20250828 \
-	LISTEN_PORT="${LISTEN_PORT:-8080}"
+	CLIENT_HOST="${CLIENT_HOST:-client}" \
+	CLIENT_PORT="${CLIENT_PORT:-9090}" \
+	LISTEN_PORT="${LISTEN_PORT:-8080}" \
+	PERIOD=5
 . base.sh
 
-# Loop
-loop() {
+# Kills the client process. Requires shared PID namespace; see
+# podman-compose.yml for setup.
+killc() {
+	local msg
+	log Sending DIE signal to "$CLIENT_HOST":"$CLIENT_PORT".
+	msg="$(printf die\\n | nc 2>&1 "$CLIENT_HOST" "$CLIENT_PORT")" ||
+		loge "$msg"
+}
+
+# Listens messages from client.
+listenc() {
 	local cnt=0 lne
 	while :; do
 		nc -l -p "$LISTEN_PORT" | {
@@ -23,15 +35,18 @@ loop() {
 		}
 		cnt=$((cnt + 1))
 		log Stored "$cnt" times.
+
+		# Triggers client killing every PERIOD counts.
+		[ $((cnt % PERIOD)) -eq 0 ] && killc
 		sleep 1
 	done
 }
 
 # Validates and listens in a loop.
 main() {
-	validate_cmd nc
+	validate_cmd awk nc
 	log "$(whoami)" is listening on "$LISTEN_PORT".
-	loop
+	listenc
 }
 
 # Keeps the first argument in DB.
