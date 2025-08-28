@@ -12,5 +12,6 @@ jobs:
       - uses: ludeeus/action-shellcheck@master
         with:
           additional_files: >
+            ./*.do
             ./client/client
             ./server/server
