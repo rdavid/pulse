@@ -18,7 +18,8 @@ RUN \
 		tzdata \
 	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/* \
-	&& useradd --create-home "$USER" \
+	&& groupadd --gid 1001 "$USER" \
+	&& useradd --create-home --gid 1001 --uid 1001 "$USER" \
 	&& cp /usr/share/zoneinfo/"$TZ" /etc/localtime \
 	&& printf %s "$TZ" > /etc/timezone \
 	&& curl --location --silent "$BASE_SRC" | \

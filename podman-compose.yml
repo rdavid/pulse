@@ -30,5 +30,6 @@ services:
     ports:
       - 8080:8080
     restart: unless-stopped
+    user: 1001:1001
     volumes:
       - ./dat:/home/server/dat

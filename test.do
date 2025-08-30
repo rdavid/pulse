@@ -28,6 +28,7 @@ out="$(podman machine start 2>&1)" || {
 	printf >&2 'VM already running or starting.\n'
 	STOP_VM=NO
 }
+mkdir -p ./dat
 out="$(podman-compose --file podman-compose-test.yml up --build 2>&1)" ||
 	die "$out"
 

@@ -2,4 +2,5 @@
 # vi:et lbr noet sw=2 ts=2 tw=79 wrap
 # SPDX-FileCopyrightText: 2025 David Rabkin
 # SPDX-License-Identifier: 0BSD
+podman system prune --all --force && podman rmi --all --force
 rm -f ./1 ./build ./clean ./lint ./test
