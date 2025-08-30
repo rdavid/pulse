@@ -19,6 +19,8 @@ jobs:
           sudo apt update
           sudo apt install --yes podman python3-pip
           pip3 install --user podman-compose
+          mkdir dat
+          chmod a+w dat
           podman-compose \
             --file podman-compose-test.yml \
             up --build --detach

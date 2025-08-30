@@ -1,5 +1,8 @@
 .redo
 1
+all
+dat
 build
 clean
 lint
+run

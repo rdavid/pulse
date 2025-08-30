@@ -12,10 +12,16 @@ readonly \
 	BASE_APP_VERSION=0.9.20250830 \
 	CLIENT_HOST="${CLIENT_HOST:-client}" \
 	CLIENT_PORT="${CLIENT_PORT:-9090}" \
+	DBFILE="${DBFILE:-dat/db}" \
 	LISTEN_PORT="${LISTEN_PORT:-8080}" \
 	PERIOD=5 \
 	TEST_MODE="${TEST_MODE:-false}"
 . base.sh
+
+# Initialize DB, clear file.
+initdb() {
+	: >"$DBFILE"
+}
 
 # Kills the client process. Requires shared PID namespace; see
 # podman-compose.yml for setup.
@@ -32,7 +38,7 @@ listenc() {
 	while :; do
 		nc -l -p "$LISTEN_PORT" | {
 			IFS= read -r lne
-			[ -n "$lne" ] && store "$lne"
+			[ -n "$lne" ] && storedb "$lne"
 		}
 		cnt=$((cnt + 1))
 		log Stored "$cnt" times.
@@ -47,13 +53,14 @@ listenc() {
 # Validates and listens in a loop.
 main() {
 	validate_cmd awk nc
+	initdb
 	log "$(whoami)" is listening on "$LISTEN_PORT".
 	listenc
 }
 
 # Keeps the first argument in DB.
-store() {
-	log DB: "$1"
+storedb() {
+	printf %s\ %s\\n "$(timestamp)" "$1" >>"$DBFILE"
 }
 
 # Starting point.

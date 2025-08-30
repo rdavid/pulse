@@ -23,6 +23,7 @@ services:
       context: .
       dockerfile: server/Containerfile
     environment:
+      - DBFILE=dat/db
       - CLIENT_HOST=client
       - CLIENT_PORT=9090
       - LISTEN_PORT=8080
@@ -31,3 +32,5 @@ services:
     ports:
       - 8080:8080
     restart: 'no'
+    volumes:
+      - ./dat:/home/server/dat
