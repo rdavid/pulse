@@ -5,4 +5,4 @@ dat
 build
 clean
 lint
-run
+test
