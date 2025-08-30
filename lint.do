@@ -10,13 +10,12 @@ redo-ifchange \
 	./client/Containerfile \
 	./server/server \
 	./server/Containerfile \
-	./podman-compose.yml \
+	./*.yml \
 	./README.adoc
 
 # shellcheck disable=SC2034 # Variable appears unused.
 readonly \
 	BASE_APP_VERSION=0.9.20250828 \
-	BASE_MIN_VERSION=0.9.20240202 \
 	BSH=/usr/local/bin/base.sh
 [ -r "$BSH" ] || {
 	printf >&2 Install\ Shellbase.\\n
@@ -45,7 +44,7 @@ cmd_exists yamllint &&
 	yamllint \
 		./.github/*.yml \
 		./.github/workflows/*.yml \
-		./podman-compose.yml
+		./*.yml
 
 # Gracefully handle missing last tool without failing the script.
 :

@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2025 David Rabkin
+# SPDX-License-Identifier: 0BSD
+---
+version: 3.9
+services:
+  client:
+    build:
+      context: .
+      dockerfile: client/Containerfile
+    depends_on:
+      - server
+    environment:
+      - LISTEN_PORT=9090
+      - SERVER_HOST=server
+      - SERVER_PORT=8080
+      - TEST_MODE=true
+    image: pulse-client:latest
+    ports:
+      - 9090:9090
+    restart: 'no'
+  server:
+    build:
+      context: .
+      dockerfile: server/Containerfile
+    environment:
+      - CLIENT_HOST=client
+      - CLIENT_PORT=9090
+      - LISTEN_PORT=8080
+      - TEST_MODE=true
+    image: pulse-server:latest
+    ports:
+      - 8080:8080
+    restart: 'no'

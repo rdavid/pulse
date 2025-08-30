@@ -9,11 +9,12 @@
 # shellcheck disable=SC3043 # Uses local variables.
 # shellcheck disable=SC1091,SC2034 # File not following, variable unused.
 readonly \
-	BASE_APP_VERSION=0.9.20250828 \
+	BASE_APP_VERSION=0.9.20250830 \
 	INTERVAL=5 \
 	LISTEN_PORT="${LISTEN_PORT:-9090}" \
 	SERVER_HOST="${SERVER_HOST:-server}" \
-	SERVER_PORT="${SERVER_PORT:-8080}"
+	SERVER_PORT="${SERVER_PORT:-8080}" \
+	TEST_MODE="${TEST_MODE:-false}"
 . base.sh
 
 # Listens for a killing signal in a separate process and terminates the
@@ -45,6 +46,7 @@ sendd() {
 			loge "$msg"
 		cnt=$((cnt + 1))
 		log "Sent $cnt times, wait for ${INTERVAL}s."
+		[ "$TEST_MODE" = true ] && cya Terminated in test mode.
 		sleep "$INTERVAL"
 	done
 }

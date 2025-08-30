@@ -14,5 +14,5 @@ jobs:
           file_or_dir: >
             ./.github/*.yml
             ./.github/workflows/*.yml
-            ./podman-compose.yml
+            ./*.yml
           strict: true

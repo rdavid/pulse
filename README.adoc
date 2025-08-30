@@ -3,11 +3,13 @@
 :!toc-title:
 
 // URLs:
+:img-build: https://github.com/rdavid/pulse/actions/workflows/build.yml/badge.svg
 :img-hoc: https://hitsofcode.com/github/rdavid/pulse?branch=master&label=hits%20of%20code
 :img-license: https://img.shields.io/github/license/rdavid/pulse?color=blue&labelColor=gray&logo=freebsd&logoColor=lightgray&style=flat
 :img-test-lnx: https://github.com/rdavid/pulse/actions/workflows/test-lnx.yml/badge.svg
 :img-test-mac: https://github.com/rdavid/pulse/actions/workflows/test-mac.yml/badge.svg
 :url-actionlint: https://github.com/rhysd/actionlint
+:url-build: https://github.com/rdavid/pulse/actions/workflows/build.yml
 :url-cv: http://cv.rabkin.co.il
 :url-goredo: http://www.goredo.cypherpunks.su/Install.html
 :url-hadolint: https://github.com/hadolint/hadolint
@@ -25,6 +27,7 @@
 
 = Pulse
 
+image:{img-build}[build,link={build}]
 image:{img-test-lnx}[test lnx,link={url-test-lnx}]
 image:{img-test-mac}[test mac,link={url-test-mac}]
 image:{img-hoc}[hits of code,link={url-hoc}]
@@ -39,7 +42,7 @@ The project is implemented using POSIX-compliant Shell
 `Portable Operating System Interface for uniX`, and utilizes the Unix shell
 framework {url-shellbase}[`shellbase`].
 
-== Build
+== Build And Start
 
 To build and start the containers with Podman Compose:
 

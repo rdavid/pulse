@@ -28,7 +28,8 @@ out="$(podman machine start 2>&1)" || {
 	printf >&2 'VM already running or starting.\n'
 	STOP_VM=NO
 }
-out="$(podman-compose build 2>&1)" || die "$out"
+out="$(podman-compose --file podman-compose-test.yml up --build 2>&1)" ||
+	die "$out"
 
 # shellcheck disable=SC2015 # A && B || C is not if-then-else.
 [ "$STOP_VM" = YES ] && podman machine stop || :

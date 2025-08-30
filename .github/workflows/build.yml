@@ -1,0 +1,27 @@
+# SPDX-FileCopyrightText: 2025 David Rabkin
+# SPDX-License-Identifier: 0BSD
+---
+name: build
+'on': [pull_request, push]
+jobs:
+  build:
+    timeout-minutes: 15
+    name: Test on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-22.04
+          - ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - uses: redhat-actions/buildah-build@v2
+        with:
+          containerfiles: ./client/Containerfile
+          image: pulse-client
+          tags: latest
+      - uses: redhat-actions/buildah-build@v2
+        with:
+          containerfiles: ./server/Containerfile
+          image: pulse-server
+          tags: latest
