@@ -15,7 +15,7 @@ redo-ifchange \
 
 # shellcheck disable=SC2034 # Variable appears unused.
 readonly \
-	BASE_APP_VERSION=0.9.20250828 \
+	BASE_APP_VERSION=0.9.20250831 \
 	BSH=/usr/local/bin/base.sh
 [ -r "$BSH" ] || {
 	printf >&2 Install\ Shellbase.\\n
@@ -25,6 +25,7 @@ set -- "$@" --quiet
 
 # shellcheck disable=SC1090 # File not following.
 . "$BSH"
+cmd_exists actionlint && actionlint
 cmd_exists hadolint &&
 	hadolint \
 		./client/Containerfile \
