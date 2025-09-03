@@ -9,13 +9,19 @@
 # shellcheck disable=SC3043 # Uses local variables.
 # shellcheck disable=SC1091,SC2034 # File not following, variable unused.
 readonly \
-	BASE_APP_VERSION=0.9.20250830 \
+	BASE_APP_VERSION=0.9.20250903 \
 	INTERVAL=5 \
 	LISTEN_PORT="${LISTEN_PORT:-9090}" \
 	SERVER_HOST="${SERVER_HOST:-server}" \
 	SERVER_PORT="${SERVER_PORT:-8080}" \
 	TEST_MODE="${TEST_MODE:-false}"
 . base.sh
+
+# List all IPv4 addresses for network interfaces in one line,
+# each entry as "<interface> <IP/CIDR>", separated by semicolons.
+iface() {
+	ip -o -4 addr show | awk '{print $2, $4}' | paste -sd ';' -
+}
 
 # Listens for a killing signal in a separate process and terminates the
 # parent process when received.
@@ -39,11 +45,10 @@ listens() {
 
 # Sends data to the server every INTERVAL seconds.
 sendd() {
-	local cnt=0 lne msg
+	local cnt=0 msg
 	while :; do
-		lne="$(prettyuptime)"
-		msg="$(printf %s\\n "$lne" | nc 2>&1 "$SERVER_HOST" "$SERVER_PORT")" ||
-			loge "$msg"
+		msg="$(printf '%s;%s\n' "$(prettyuptime)" "$(iface)" |
+			nc 2>&1 "$SERVER_HOST" "$SERVER_PORT")" || loge "$msg"
 		cnt=$((cnt + 1))
 		log "Sent $cnt times, wait for ${INTERVAL}s."
 		[ "$TEST_MODE" = true ] && cya Terminated in test mode.
@@ -53,7 +58,7 @@ sendd() {
 
 # Validates and sends data in a loop.
 main() {
-	validate_cmd nc
+	validate_cmd awk ip nc
 	listens
 	log "$(whoami)" is sending data to "$SERVER_HOST":"$SERVER_PORT".
 	sendd
