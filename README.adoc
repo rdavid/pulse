@@ -41,9 +41,24 @@ toc::[]
 == About
 
 Pulse is a client-server network communication project.
+It creates a connection between a server and a client using containers, and
+shares the client’s monitoring information with the server.
 The project is implemented using POSIX-compliant Shell
 `Portable Operating System Interface for uniX`, and utilizes the Unix shell
 framework {url-shellbase}[`shellbase`].
+
+== Objectives
+
+`ubuntu:24.04` is used as the base image for both the client and the server.
+The client collects and sends the following data to the server every five
+seconds:
+
+* Host uptime
+* Host network interface names and IP addresses
+
+The server stores the client data in a database.
+After receiving five status updates, the server sends a restart signal, causing
+the service within the client container to restart.
 
 == Build And Start
 
