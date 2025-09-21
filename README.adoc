@@ -49,7 +49,7 @@ framework {url-shellbase}[`shellbase`].
 
 == Objectives
 
-`ubuntu:24.04` is used as the base image for both the client and the server.
+`alpine` is used as the base image for both the client and the server.
 The client collects and sends the following data to the server every five
 seconds:
 
