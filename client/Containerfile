@@ -3,8 +3,8 @@
 FROM alpine:3.22.1
 LABEL maintainer=David\ Rabkin\ <david@rabkin.co.il>
 ENV \
-	BASE_REL=0.9.20250808 \
-	BASE_SRC=https://github.com/rdavid/shellbase/archive/refs/tags/v0.9.20250808.tar.gz \
+	BASE_REL=0.9.20251010 \
+	BASE_SRC=https://github.com/rdavid/shellbase/archive/refs/tags/v0.9.20251010.tar.gz \
 	TZ=Asia/Jerusalem \
 	USER=client
 COPY LICENSES/* /licenses/
