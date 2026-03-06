@@ -23,7 +23,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
-      - uses: docker/metadata-action@v5
+      - uses: docker/metadata-action@v6
         id: meta-client
         with:
           images: ${{ env.REGISTRY }}/${{ env.CLIENT }}
@@ -50,7 +50,7 @@ jobs:
             linux/arm64"
           push: true
           tags: ${{ steps.meta-client.outputs.tags }}
-      - uses: docker/metadata-action@v5
+      - uses: docker/metadata-action@v6
         id: meta-server
         with:
           images: ${{ env.REGISTRY }}/${{ env.SERVER }}
