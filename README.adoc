@@ -12,7 +12,7 @@
 :url-actionlint: https://github.com/rhysd/actionlint
 :url-build: https://github.com/rdavid/pulse/actions/workflows/build.yml
 :url-cv: http://cv.rabkin.co.il
-:url-goredo: http://www.goredo.cypherpunks.su/Install.html
+:url-goredo: http://www.goredo.stargrave.org/INSTALL.html
 :url-hadolint: https://github.com/hadolint/hadolint
 :url-hoc: https://hitsofcode.com/view/github/rdavid/pulse?branch=master
 :url-license: https://github.com/rdavid/pulse/blob/master/LICENSES/0BSD.txt
