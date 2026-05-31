@@ -29,11 +29,11 @@
 
 = Pulse
 
-image:{img-build}[build,link={build}]
+image:{img-build}[build,link={url-build}]
 image:{img-test-lnx}[test lnx,link={url-test-lnx}]
 image:{img-test-mac}[test mac,link={url-test-mac}]
 image:{img-hoc}[hits of code,link={url-hoc}]
-image:{img-releases}[release),link={url-releases}]
+image:{img-releases}[release,link={url-releases}]
 image:{img-license}[license,link={url-license}]
 
 toc::[]

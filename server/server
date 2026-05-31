@@ -1,6 +1,6 @@
 #!/bin/sh
 # vi:et lbr noet sw=2 ts=2 tw=79 wrap
-# SPDX-FileCopyrightText: 2025 David Rabkin
+# SPDX-FileCopyrightText: 2025-2026 David Rabkin
 # SPDX-License-Identifier: 0BSD
 #
 # The script uses local variables which are not POSIX but supported by most
@@ -20,7 +20,7 @@ readonly \
 
 # Initialize DB, clear file.
 initdb() {
-	iswritable "$DBFILE" || die Check "$DBFILE".
+	iswritable "$DBFILE" || die "Check $DBFILE."
 	: >"$DBFILE"
 }
 
@@ -28,12 +28,12 @@ initdb() {
 # podman-compose.yml for setup.
 killc() {
 	local msg
-	log Sending DIE signal to "$CLIENT_HOST":"$CLIENT_PORT".
+	log "Sending DIE signal to $CLIENT_HOST:$CLIENT_PORT."
 	msg="$(printf die\\n | nc 2>&1 "$CLIENT_HOST" "$CLIENT_PORT")" ||
 		loge "$msg"
 }
 
-# Listens messages from client.
+# Listens for messages from the client.
 listenc() {
 	local cnt=0 lne
 	while :; do
@@ -42,10 +42,10 @@ listenc() {
 			[ -n "$lne" ] && storedb "$lne"
 		}
 		cnt=$((cnt + 1))
-		log Stored "$cnt" times.
+		log "Stored $cnt times."
 		[ "$TEST_MODE" = true ] && cya Terminated in test mode.
 
-		# Triggers client killing every PERIOD counts.
+		# Triggers client killing every PERIOD iterations.
 		[ $((cnt % PERIOD)) -eq 0 ] && killc
 		sleep 1
 	done
@@ -55,7 +55,7 @@ listenc() {
 main() {
 	validate_cmd awk nc
 	initdb
-	log "$(whoami)" is listening on "$LISTEN_PORT".
+	log "$(whoami) is listening on $LISTEN_PORT."
 	listenc
 }
 

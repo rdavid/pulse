@@ -1,6 +1,6 @@
 #!/bin/sh
 # vi:et lbr noet sw=2 ts=2 tw=79 wrap
-# SPDX-FileCopyrightText: 2025 David Rabkin
+# SPDX-FileCopyrightText: 2025-2026 David Rabkin
 # SPDX-License-Identifier: 0BSD
 #
 # The script uses local variables which are not POSIX but supported by most
@@ -36,7 +36,7 @@ listens() {
 					log Killed in action!
 					kill -- -$dad
 				}
-				log Got "$lne".
+				log "Got $lne."
 			}
 			sleep 1
 		done
@@ -60,7 +60,7 @@ sendd() {
 main() {
 	validate_cmd awk ip nc
 	listens
-	log "$(whoami)" is sending data to "$SERVER_HOST":"$SERVER_PORT".
+	log "$(whoami) is sending data to $SERVER_HOST:$SERVER_PORT."
 	sendd
 }
 
