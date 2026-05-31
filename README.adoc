@@ -43,8 +43,8 @@ toc::[]
 Pulse is a client-server network communication project.
 It creates a connection between a server and a client using containers, and
 shares client monitoring information with the server.
-The project is implemented using POSIX-compliant Shell
-`Portable Operating System Interface for uniX`, and utilizes the Unix shell
+The project is implemented using POSIX-compliant shell
+(Portable Operating System Interface for uniX) and uses the Unix shell
 framework {url-shellbase}[`shellbase`].
 
 == Objectives
@@ -57,10 +57,10 @@ seconds:
 * Host network interface names and IP addresses
 
 The server stores the client data in a database.
-After receiving five status updates, the server sends a restart signal, causing
-the service within the client container to restart.
+After every five status updates, the server sends a kill signal to restart
+the client service.
 
-== Build And Start
+== Build and Start
 
 To build and start the containers with Podman Compose:
 
