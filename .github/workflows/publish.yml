@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2025 David Rabkin
+# SPDX-FileCopyrightText: 2025-2026 David Rabkin
 # SPDX-License-Identifier: 0BSD
 ---
 name: publish
@@ -12,8 +12,8 @@ env:
   SERVER: ${{ github.repository }}-server
 jobs:
   publish:
-    runs-on: ubuntu-24.04
     timeout-minutes: 15
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v6
       - uses: docker/setup-qemu-action@v4
@@ -44,10 +44,7 @@ jobs:
           context: .
           file: client/Containerfile
           labels: ${{ steps.meta-client.outputs.labels }}
-          platforms: "\
-            linux/amd64,\
-            linux/arm/v7,\
-            linux/arm64"
+          platforms: linux/amd64,linux/arm/v7,linux/arm64
           push: true
           tags: ${{ steps.meta-client.outputs.tags }}
       - uses: docker/metadata-action@v6
@@ -71,9 +68,6 @@ jobs:
           context: .
           file: server/Containerfile
           labels: ${{ steps.meta-server.outputs.labels }}
-          platforms: "\
-            linux/amd64,\
-            linux/arm/v7,\
-            linux/arm64"
+          platforms: linux/amd64,linux/arm/v7,linux/arm64
           push: true
           tags: ${{ steps.meta-server.outputs.tags }}
