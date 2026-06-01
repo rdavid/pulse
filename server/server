@@ -9,7 +9,7 @@
 # shellcheck disable=SC3043 # Uses local variables.
 # shellcheck disable=SC1091,SC2034 # File not following, variable unused.
 readonly \
-	BASE_APP_VERSION=0.9.20250831 \
+	BASE_APP_VERSION=0.9.20260601 \
 	CLIENT_HOST="${CLIENT_HOST:-client}" \
 	CLIENT_PORT="${CLIENT_PORT:-9090}" \
 	DBFILE="${DBFILE:-dat/db}" \
@@ -55,7 +55,7 @@ listenc() {
 main() {
 	validate_cmd awk nc
 	initdb
-	log "$(whoami) is listening on $LISTEN_PORT."
+	log "$(id -nu) is listening on $LISTEN_PORT."
 	listenc
 }
 

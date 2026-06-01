@@ -11,10 +11,10 @@ redo-ifchange \
 
 # shellcheck disable=SC2034 # Variable appears unused.
 readonly \
-	BASE_APP_VERSION=0.9.20250830 \
+	BASE_APP_VERSION=0.9.20260601 \
 	BSH=/usr/local/bin/base.sh
 [ -r "$BSH" ] || {
-	printf >&2 Install\ shellbase.\\n
+	printf >&2 'Install shellbase.\n'
 	exit 1
 }
 set -- "$@" --quiet

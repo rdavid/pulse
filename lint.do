@@ -1,6 +1,6 @@
 # shellcheck shell=sh
 # vi:et lbr noet sw=2 ts=2 tw=79 wrap
-# SPDX-FileCopyrightText: 2025 David Rabkin
+# SPDX-FileCopyrightText: 2025-2026 David Rabkin
 # SPDX-License-Identifier: 0BSD
 redo-ifchange \
 	./.github/*.yml \
@@ -15,10 +15,10 @@ redo-ifchange \
 
 # shellcheck disable=SC2034 # Variable appears unused.
 readonly \
-	BASE_APP_VERSION=0.9.20250831 \
+	BASE_APP_VERSION=0.9.20260601 \
 	BSH=/usr/local/bin/base.sh
 [ -r "$BSH" ] || {
-	printf >&2 Install\ Shellbase.\\n
+	printf >&2 'Install shellbase.\n'
 	exit 1
 }
 set -- "$@" --quiet
