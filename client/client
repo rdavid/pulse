@@ -9,7 +9,7 @@
 # shellcheck disable=SC3043 # Uses local variables.
 # shellcheck disable=SC1091,SC2034 # File not following, variable unused.
 readonly \
-	BASE_APP_VERSION=0.9.20260609 \
+	BASE_APP_VERSION=0.9.20260610 \
 	INTERVAL=5 \
 	LISTEN_PORT="${LISTEN_PORT:-9090}" \
 	SERVER_HOST="${SERVER_HOST:-server}" \
@@ -19,7 +19,7 @@ readonly \
 
 # Validates and sends data in a loop.
 main() {
-	validate_cmd awk ip nc
+	validate_cmd awk ip nc paste
 	listens
 	log "$(id -nu) is sending data to $SERVER_HOST:$SERVER_PORT."
 	sendd
@@ -40,11 +40,8 @@ listens() {
 		while :; do
 			nc -l -p "$LISTEN_PORT" | {
 				IFS= read -r lne
-				[ "$lne" = die ] && {
-					log Killed in action!
-					kill -- -$dad
-				}
 				log "Got $lne."
+				[ "$lne" = die ] && kill -- -$dad
 			}
 			sleep 1
 		done
