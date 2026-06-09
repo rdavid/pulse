@@ -36,7 +36,6 @@ jobs:
             org.opencontainers.image.vendor=David Rabkin
           tags: |
             type=raw,value=latest
-            type=schedule,pattern=nightly
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}},priority=901
       - uses: docker/build-push-action@v7
@@ -60,7 +59,6 @@ jobs:
             org.opencontainers.image.vendor=David Rabkin
           tags: |
             type=raw,value=latest
-            type=schedule,pattern=nightly
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}},priority=901
       - uses: docker/build-push-action@v7
