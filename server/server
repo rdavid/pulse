@@ -9,7 +9,7 @@
 # shellcheck disable=SC3043 # Uses local variables.
 # shellcheck disable=SC1091,SC2034 # File not following, variable unused.
 readonly \
-	BASE_APP_VERSION=0.9.20260601 \
+	BASE_APP_VERSION=0.9.20260609 \
 	CLIENT_HOST="${CLIENT_HOST:-client}" \
 	CLIENT_PORT="${CLIENT_PORT:-9090}" \
 	DBFILE="${DBFILE:-dat/db}" \
@@ -17,6 +17,14 @@ readonly \
 	PERIOD=5 \
 	TEST_MODE="${TEST_MODE:-false}"
 . base.sh
+
+# Validates and listens in a loop.
+main() {
+	validate_cmd nc
+	initdb
+	log "$(id -nu) is listening on $LISTEN_PORT."
+	listenc
+}
 
 # Initialize DB, clear file.
 initdb() {
@@ -49,14 +57,6 @@ listenc() {
 		[ $((cnt % PERIOD)) -eq 0 ] && killc
 		sleep 1
 	done
-}
-
-# Validates and listens in a loop.
-main() {
-	validate_cmd awk nc
-	initdb
-	log "$(id -nu) is listening on $LISTEN_PORT."
-	listenc
 }
 
 # Keeps the first argument in DB.
