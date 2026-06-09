@@ -26,7 +26,7 @@ main() {
 	listenc
 }
 
-# Initialize DB, clear file.
+# Initializes DB, clears file.
 initdb() {
 	iswritable "$DBFILE" || die "Check $DBFILE."
 	: >"$DBFILE"

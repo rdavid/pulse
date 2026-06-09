@@ -15,7 +15,7 @@ redo-ifchange \
 
 # shellcheck disable=SC2034 # Variable appears unused.
 readonly \
-	BASE_APP_VERSION=0.9.20260601 \
+	BASE_APP_VERSION=0.9.20260609 \
 	BSH=/usr/local/bin/base.sh
 [ -r "$BSH" ] || {
 	printf >&2 'Install shellbase.\n'
@@ -47,5 +47,5 @@ cmd_exists yamllint &&
 		./.github/workflows/*.yml \
 		./*.yml
 
-# Gracefully handle missing last tool without failing the script.
+# Handles the missing last tool gracefully without failing the script.
 :

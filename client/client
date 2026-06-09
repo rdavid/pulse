@@ -25,7 +25,7 @@ main() {
 	sendd
 }
 
-# List all IPv4 addresses for network interfaces in one line,
+# Lists all IPv4 addresses for network interfaces in one line,
 # each entry as "<interface> <IP/CIDR>", separated by semicolons.
 iface() {
 	ip -o -4 addr show | awk '{print $2, $4}' | paste -sd ';' -

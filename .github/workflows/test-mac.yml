@@ -1,6 +1,6 @@
 # SPDX-FileCopyrightText: 2025-2026 David Rabkin
 # SPDX-License-Identifier: 0BSD
-# macOS cannot run containers natively, so this workflow runs lint tests only.
+# Runs lint tests only because macOS cannot run containers natively.
 ---
 name: test-mac
 'on': [pull_request, push]
