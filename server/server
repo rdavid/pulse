@@ -47,7 +47,7 @@ listenc() {
 	while :; do
 		nc -l -p "$LISTEN_PORT" | {
 			IFS= read -r lne
-			[ -n "$lne" ] && storedb "$lne"
+			storedb "$lne"
 		}
 		cnt=$((cnt + 1))
 		log "Stored $cnt times."
@@ -61,7 +61,8 @@ listenc() {
 
 # Keeps the first argument in DB.
 storedb() {
-	printf %s\ %s\\n "$(timestamp)" "$1" >>"$DBFILE"
+	[ -n "$1" ] || return 0
+	printf '%s %s\n' "$(timestamp)" "$1" >>"$DBFILE"
 }
 
 # Starting point.
