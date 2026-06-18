@@ -21,15 +21,15 @@ jobs:
     timeout-minutes: 15
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v6
-      - uses: docker/setup-qemu-action@v4
-      - uses: docker/setup-buildx-action@v4
-      - uses: docker/login-action@v4
+      - uses: actions/checkout@v6.0.3
+      - uses: docker/setup-qemu-action@v4.1.0
+      - uses: docker/setup-buildx-action@v4.1.0
+      - uses: docker/login-action@v4.2.0
         with:
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
-      - uses: docker/metadata-action@v6
+      - uses: docker/metadata-action@v6.1.0
         id: meta-client
         with:
           images: ${{ env.REGISTRY }}/${{ env.CLIENT }}
@@ -44,7 +44,7 @@ jobs:
             type=raw,value=latest
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}},priority=901
-      - uses: docker/build-push-action@v7
+      - uses: docker/build-push-action@v7.2.0
         with:
           context: .
           file: client/Containerfile
@@ -52,7 +52,7 @@ jobs:
           platforms: linux/amd64,linux/arm/v7,linux/arm64
           push: true
           tags: ${{ steps.meta-client.outputs.tags }}
-      - uses: docker/metadata-action@v6
+      - uses: docker/metadata-action@v6.1.0
         id: meta-server
         with:
           images: ${{ env.REGISTRY }}/${{ env.SERVER }}
@@ -67,7 +67,7 @@ jobs:
             type=raw,value=latest
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}},priority=901
-      - uses: docker/build-push-action@v7
+      - uses: docker/build-push-action@v7.2.0
         with:
           context: .
           file: server/Containerfile

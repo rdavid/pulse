@@ -22,13 +22,13 @@ jobs:
           - ubuntu-22.04
           - ubuntu-24.04
     steps:
-      - uses: actions/checkout@v6
-      - uses: redhat-actions/buildah-build@v2
+      - uses: actions/checkout@v6.0.3
+      - uses: redhat-actions/buildah-build@v2.13
         with:
           containerfiles: ./client/Containerfile
           image: pulse-client
           tags: latest
-      - uses: redhat-actions/buildah-build@v2
+      - uses: redhat-actions/buildah-build@v2.13
         with:
           containerfiles: ./server/Containerfile
           image: pulse-server
