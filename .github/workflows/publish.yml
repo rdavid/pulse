@@ -6,6 +6,12 @@ name: publish
   push:
     tags:
       - v*
+permissions:
+  contents: read
+  packages: write
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
 env:
   CLIENT: ${{ github.repository }}-client
   REGISTRY: ghcr.io

@@ -2,7 +2,15 @@
 # SPDX-License-Identifier: 0BSD
 ---
 name: actionlint
-'on': [pull_request, push]
+'on':
+  pull_request:
+  push:
+    branches: [master]
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 env:
   URL: https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash # yamllint disable-line
 jobs:

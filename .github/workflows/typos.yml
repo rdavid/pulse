@@ -2,7 +2,15 @@
 # SPDX-License-Identifier: 0BSD
 ---
 name: typos
-'on': [pull_request, push]
+'on':
+  pull_request:
+  push:
+    branches: [master]
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   typos:
     timeout-minutes: 15

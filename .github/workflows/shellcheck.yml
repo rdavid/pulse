@@ -2,7 +2,15 @@
 # SPDX-License-Identifier: 0BSD
 ---
 name: shellcheck
-'on': [pull_request, push]
+'on':
+  pull_request:
+  push:
+    branches: [master]
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   shellcheck:
     timeout-minutes: 15
