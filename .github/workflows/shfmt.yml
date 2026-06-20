@@ -16,6 +16,6 @@ jobs:
     timeout-minutes: 15
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v6.0.3
+      - uses: actions/checkout@v7.0.0
       - uses: mfinelli/setup-shfmt@v4.0.1
       - run: shfmt -d ./*.do ./client/client ./server/server
