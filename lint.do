@@ -13,9 +13,10 @@ redo-ifchange \
 	./*.yml \
 	./README.adoc
 
-# shellcheck disable=SC2034 # Variable appears unused.
+# Variable appears unused:
+#  shellcheck disable=SC2034
 readonly \
-	BASE_APP_VERSION=0.9.20260609 \
+	BASE_APP_VERSION=0.9.20260627 \
 	BSH=/usr/local/bin/base.sh
 [ -r "$BSH" ] || {
 	printf >&2 'Install shellbase.\n'
@@ -23,7 +24,8 @@ readonly \
 }
 set -- "$@" --quiet
 
-# shellcheck disable=SC1090 # File not following.
+# File not following:
+#  shellcheck disable=SC1090
 . "$BSH"
 cmd_exists actionlint && actionlint
 cmd_exists hadolint &&

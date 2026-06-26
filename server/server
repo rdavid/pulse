@@ -6,10 +6,10 @@
 # The script uses local variables which are not POSIX but supported by most
 # shells. See:
 #  https://stackoverflow.com/q/18597697
-# shellcheck disable=SC3043 # Uses local variables.
-# shellcheck disable=SC1091,SC2034 # File not following, variable unused.
+# Local variables, file not following, variable unused:
+#  shellcheck disable=SC1091,SC2034,SC3043
 readonly \
-	BASE_APP_VERSION=0.9.20260609 \
+	BASE_APP_VERSION=0.9.20260627 \
 	CLIENT_HOST="${CLIENT_HOST:-client}" \
 	CLIENT_PORT="${CLIENT_PORT:-9090}" \
 	DBFILE="${DBFILE:-dat/db}" \
@@ -41,7 +41,8 @@ killc() {
 		loge "$msg"
 }
 
-# Listens for messages from the client.
+# Listens for messages from the client. Triggers client killing every
+# PERIOD iterations.
 listenc() {
 	local cnt=0 lne
 	while :; do
@@ -52,8 +53,6 @@ listenc() {
 		cnt=$((cnt + 1))
 		log "Stored $cnt times."
 		[ "$TEST_MODE" = true ] && cya Terminated in test mode.
-
-		# Triggers client killing every PERIOD iterations.
 		[ $((cnt % PERIOD)) -eq 0 ] && killc
 		sleep 1
 	done
@@ -65,5 +64,5 @@ storedb() {
 	printf '%s %s\n' "$(timestamp)" "$1" >>"$DBFILE"
 }
 
-# Starting point.
+# Entry point.
 main "$@"

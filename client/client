@@ -6,10 +6,10 @@
 # The script uses local variables which are not POSIX but supported by most
 # shells. See:
 #  https://stackoverflow.com/q/18597697
-# shellcheck disable=SC3043 # Uses local variables.
-# shellcheck disable=SC1091,SC2034 # File not following, variable unused.
+# Local variables, file not following, variable unused:
+#  shellcheck disable=SC1091,SC2034,SC3043
 readonly \
-	BASE_APP_VERSION=0.9.20260610 \
+	BASE_APP_VERSION=0.9.20260627 \
 	INTERVAL=5 \
 	LISTEN_PORT="${LISTEN_PORT:-9090}" \
 	SERVER_HOST="${SERVER_HOST:-server}" \
@@ -61,5 +61,5 @@ sendd() {
 	done
 }
 
-# Starting point.
+# Entry point.
 main "$@"

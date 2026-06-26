@@ -9,9 +9,10 @@ redo-ifchange \
 	./server/Containerfile \
 	./*.yml
 
-# shellcheck disable=SC2034 # Variable appears unused.
+# Variable appears unused:
+#  shellcheck disable=SC2034
 readonly \
-	BASE_APP_VERSION=0.9.20260601 \
+	BASE_APP_VERSION=0.9.20260627 \
 	BSH=/usr/local/bin/base.sh
 [ -r "$BSH" ] || {
 	printf >&2 'Install shellbase.\n'
@@ -19,7 +20,8 @@ readonly \
 }
 set -- "$@" --quiet
 
-# shellcheck disable=SC1090 # File not following.
+# File not following:
+#  shellcheck disable=SC1090
 . "$BSH"
 validate_cmd podman podman-compose
 STOP_VM=YES
@@ -32,5 +34,6 @@ mkdir -p ./dat
 out="$(podman-compose --file podman-compose-test.yml up --build 2>&1)" ||
 	die "$out"
 
-# shellcheck disable=SC2015 # A && B || C is not if-then-else.
+# A && B || C is not if-then-else:
+#  shellcheck disable=SC2015
 [ "$STOP_VM" = YES ] && podman machine stop || :
