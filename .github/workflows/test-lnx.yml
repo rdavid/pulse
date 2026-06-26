@@ -20,7 +20,8 @@ jobs:
       fail-fast: false
       matrix:
         os:
-          - ubuntu-22.04
+          # The round-trip test needs container-name DNS, absent from
+          # podman 3.4 on ubuntu-22.04. ubuntu-24.04 ships podman 4.9.
           - ubuntu-24.04
     steps:
       - uses: actions/checkout@v7.0.0
@@ -30,12 +31,19 @@ jobs:
           sudo apt update
           sudo apt install --yes podman python3-pip
           pip3 install --user podman-compose
-          mkdir dat
+          mkdir -p dat
           chmod a+w dat
           podman-compose \
             --file podman-compose-test.yml \
             up --build --detach
-          sleep 5
+          for _ in $(seq 30); do
+            [ -s dat/db ] && break
+            sleep 1
+          done
           podman-compose \
             --file podman-compose-test.yml \
             down
+          [ -s dat/db ] || {
+            echo 'Server stored no data.' >&2
+            exit 1
+          }

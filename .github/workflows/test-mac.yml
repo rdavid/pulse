@@ -12,9 +12,6 @@ permissions:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
-env:
-  BASE_REL: 0.9.20260404
-  BASE_SRC: https://github.com/rdavid/shellbase/archive/refs/tags/v0.9.20260404.tar.gz # yamllint disable-line
 jobs:
   test-mac:
     timeout-minutes: 15
@@ -31,12 +28,14 @@ jobs:
         with:
           persist-credentials: false
       - run: |
+          rel=0.9.20260404
+          srv=https://github.com/rdavid/shellbase/archive/refs/tags
           brew install goredo
-          curl --location --silent "$BASE_SRC" |
+          curl --location --silent "$srv/v$rel.tar.gz" |
             tar \
               --directory /usr/local/bin \
               --extract \
               --gzip \
               --strip-components=2 \
-              shellbase-"$BASE_REL"/lib/base.sh
+              shellbase-"$rel"/lib/base.sh
           redo -xx lint
