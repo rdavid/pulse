@@ -4,8 +4,12 @@
 name: yamllint
 'on':
   pull_request:
+    paths: &paths
+      - '**.yml'
+      - '**.yaml'
   push:
     branches: [master]
+    paths: *paths
 permissions:
   contents: read
 concurrency:

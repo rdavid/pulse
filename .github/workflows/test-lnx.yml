@@ -4,8 +4,13 @@
 name: test-lnx
 'on':
   pull_request:
+    paths: &paths
+      - client/**
+      - server/**
+      - podman-compose-test.yml
   push:
     branches: [master]
+    paths: *paths
 permissions:
   contents: read
 concurrency:

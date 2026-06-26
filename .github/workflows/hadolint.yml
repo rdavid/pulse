@@ -4,8 +4,11 @@
 name: hadolint
 'on':
   pull_request:
+    paths: &paths
+      - '**/Containerfile'
   push:
     branches: [master]
+    paths: *paths
 permissions:
   contents: read
 concurrency:

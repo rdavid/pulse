@@ -4,8 +4,12 @@
 name: build
 'on':
   pull_request:
+    paths: &paths
+      - client/**
+      - server/**
   push:
     branches: [master]
+    paths: *paths
 permissions:
   contents: read
 concurrency:
