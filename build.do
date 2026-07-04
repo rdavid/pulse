@@ -12,7 +12,7 @@ redo-ifchange \
 # Variable appears unused:
 #  shellcheck disable=SC2034
 readonly \
-	BASE_APP_VERSION=0.9.20260627 \
+	BASE_APP_VERSION=0.9.20260705 \
 	BSH=/usr/local/bin/base.sh
 [ -r "$BSH" ] || {
 	printf >&2 'Install shellbase.\n'
@@ -23,7 +23,7 @@ set -- "$@" --quiet
 # File not following:
 #  shellcheck disable=SC1090
 . "$BSH"
-validate_cmd podman podman-compose
+cmd_exists podman podman-compose || die
 STOP_VM=YES
 out="$(podman machine start 2>&1)" || {
 	[ $? = 125 ] || die "$out"

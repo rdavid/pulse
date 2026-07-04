@@ -9,7 +9,7 @@
 # Local variables, file not following, variable unused:
 #  shellcheck disable=SC1091,SC2034,SC3043
 readonly \
-	BASE_APP_VERSION=0.9.20260627 \
+	BASE_APP_VERSION=0.9.20260705 \
 	CLIENT_HOST="${CLIENT_HOST:-client}" \
 	CLIENT_PORT="${CLIENT_PORT:-9090}" \
 	DBFILE="${DBFILE:-dat/db}" \
@@ -20,7 +20,7 @@ readonly \
 
 # Validates and listens in a loop.
 main() {
-	validate_cmd nc
+	cmd_exists nc || die
 	initdb
 	log "$(id -nu) is listening on $LISTEN_PORT."
 	listenc
