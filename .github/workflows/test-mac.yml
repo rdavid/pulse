@@ -28,7 +28,7 @@ jobs:
         with:
           persist-credentials: false
       - run: |
-          rel=0.9.20260404
+          rel=0.9.20260707
           srv=https://github.com/rdavid/shellbase/archive/refs/tags
           brew install goredo
           curl --location --silent "$srv/v$rel.tar.gz" |
