@@ -2,6 +2,9 @@
 # vi: lbr noet sw=2 ts=2 tw=79 wrap
 # SPDX-FileCopyrightText: 2025-2026 David Rabkin
 # SPDX-License-Identifier: 0BSD
+#
+# Builds the images and runs the round-trip test with podman-compose.
+# Starts the podman VM when needed and stops it afterwards.
 redo-ifchange \
 	./client/client \
 	./client/Containerfile \
@@ -12,7 +15,7 @@ redo-ifchange \
 # Variable appears unused:
 #  shellcheck disable=SC2034
 readonly \
-	BASE_APP_VERSION=0.9.20260705 \
+	BASE_APP_VERSION=0.9.20260711 \
 	BSH=/usr/local/bin/base.sh
 [ -r "$BSH" ] || {
 	printf >&2 'Install shellbase.\n'

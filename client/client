@@ -9,7 +9,7 @@
 # Local variables, file not following, variable unused:
 #  shellcheck disable=SC1091,SC2034,SC3043
 readonly \
-	BASE_APP_VERSION=0.9.20260705 \
+	BASE_APP_VERSION=0.9.20260711 \
 	INTERVAL=5 \
 	LISTEN_PORT="${LISTEN_PORT:-9090}" \
 	SERVER_HOST="${SERVER_HOST:-server}" \
@@ -17,7 +17,8 @@ readonly \
 	TEST_MODE="${TEST_MODE:-false}"
 . base.sh
 
-# Validates and sends data in a loop.
+# Validates required commands, starts the listener, and sends data in a
+# loop.
 main() {
 	cmd_exists awk ip nc paste || die
 	listens
@@ -25,14 +26,15 @@ main() {
 	sendd
 }
 
-# Lists all IPv4 addresses for network interfaces in one line,
-# each entry as "<interface> <IP/CIDR>", separated by semicolons.
+# Lists every network interface with its IPv4 address on a single line.
+# Each entry has the form "<interface> <IP/CIDR>" and a semicolon separates
+# the entries.
 iface() {
 	ip -o -4 addr show | awk '{print $2, $4}' | paste -sd ';' -
 }
 
-# Listens for a killing signal in a separate process and terminates the
-# parent process when received.
+# Listens in a background process for the die message and terminates the
+# parent process group when it arrives.
 listens() {
 	local dad="$$"
 	(

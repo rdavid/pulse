@@ -1,5 +1,9 @@
 # SPDX-FileCopyrightText: 2025-2026 David Rabkin
 # SPDX-License-Identifier: 0BSD
+#
+# The round-trip test needs container-name DNS, which podman 3.4 on
+# ubuntu-22.04 lacks. The ubuntu-24.04 image ships podman 4.9, so the
+# matrix holds that single entry.
 ---
 name: test-lnx
 'on':
@@ -29,8 +33,6 @@ jobs:
       fail-fast: false
       matrix:
         os:
-          # The round-trip test needs container-name DNS, absent from
-          # podman 3.4 on ubuntu-22.04. ubuntu-24.04 ships podman 4.9.
           - ubuntu-24.04
     steps:
       - uses: actions/checkout@v7.0.0

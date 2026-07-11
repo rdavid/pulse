@@ -9,7 +9,7 @@
 # Local variables, file not following, variable unused:
 #  shellcheck disable=SC1091,SC2034,SC3043
 readonly \
-	BASE_APP_VERSION=0.9.20260705 \
+	BASE_APP_VERSION=0.9.20260711 \
 	CLIENT_HOST="${CLIENT_HOST:-client}" \
 	CLIENT_PORT="${CLIENT_PORT:-9090}" \
 	DBFILE="${DBFILE:-dat/db}" \
@@ -18,7 +18,8 @@ readonly \
 	TEST_MODE="${TEST_MODE:-false}"
 . base.sh
 
-# Validates and listens in a loop.
+# Validates required commands, initializes the database, and listens in a
+# loop.
 main() {
 	cmd_exists nc || die
 	initdb
@@ -26,22 +27,22 @@ main() {
 	listenc
 }
 
-# Initializes DB, clears file.
+# Initializes the database by truncating its file.
 initdb() {
 	iswritable "$DBFILE" || die "Check $DBFILE."
 	: >"$DBFILE"
 }
 
-# Kills the client process. Requires shared PID namespace; see
-# podman-compose.yml for setup.
+# Sends the die message to the client. The client kills its own process
+# group when the message arrives.
 killc() {
 	local msg
-	log "Sending DIE signal to $CLIENT_HOST:$CLIENT_PORT."
+	log "Sending the die message to $CLIENT_HOST:$CLIENT_PORT."
 	msg="$(printf die\\n | nc 2>&1 "$CLIENT_HOST" "$CLIENT_PORT")" ||
 		loge "$msg"
 }
 
-# Listens for messages from the client. Triggers client killing every
+# Listens for messages from the client. Triggers a client restart every
 # PERIOD iterations.
 listenc() {
 	local cnt=0 lne
@@ -58,7 +59,7 @@ listenc() {
 	done
 }
 
-# Keeps the first argument in DB.
+# Appends the first argument to the database with a timestamp.
 storedb() {
 	[ -n "$1" ] || return 0
 	printf '%s %s\n' "$(timestamp)" "$1" >>"$DBFILE"
