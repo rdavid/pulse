@@ -26,6 +26,7 @@
 :url-test-mac: https://github.com/rdavid/pulse/actions/workflows/test-mac.yml
 :url-typos: https://github.com/crate-ci/typos
 :url-yamllint: https://github.com/adrienverge/yamllint
+:url-zizmor: https://github.com/zizmorcore/zizmor
 
 = Pulse
 
@@ -41,22 +42,21 @@ toc::[]
 == About
 
 Pulse is a client-server network communication project.
-It creates a connection between a server and a client using containers, and
-shares client monitoring information with the server.
-The project is implemented using POSIX-compliant shell
-(Portable Operating System Interface for uniX) and uses the Unix shell
-framework {url-shellbase}[`shellbase`].
+A containerized client collects monitoring data and reports it to a
+containerized server.
+Both are POSIX-compliant shell
+(Portable Operating System Interface for uniX) scripts built on the Unix
+shell framework {url-shellbase}[`shellbase`].
 
 == Objectives
 
-`alpine` is used as the base image for both the client and the server.
-The client collects and sends the following data to the server every five
-seconds:
+Both the client and the server run on the `alpine` base image.
+Every five seconds the client sends the following data to the server:
 
 * Host uptime
 * Host network interface names and IP addresses
 
-The server stores the client data in a database.
+The server stores the received data in a database.
 After every five status updates, the server sends a kill signal to restart
 the client service.
 
@@ -90,9 +90,12 @@ You can install Sergey Matveev's {url-goredo}[`goredo`] implementation.
 {url-shellcheck}[`shellcheck`],
 {url-shfmt}[`shfmt`],
 {url-typos}[`typos`],
-{url-yamllint}[`yamllint`].
+{url-yamllint}[`yamllint`],
+{url-zizmor}[`zizmor`].
+It also parses each script with `dash` and `mksh` to reject syntax the
+project's target shells do not accept.
 
 == License
 
-`pulse` is copyright {url-cv}[David Rabkin] and available under a
+`pulse` belongs to {url-cv}[David Rabkin] and uses a
 {url-license}[Zero-Clause BSD license].
