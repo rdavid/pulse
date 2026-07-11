@@ -25,7 +25,7 @@ redo-ifchange \
 	./README.adoc
 readonly \
 	BASE_APP_VERSION=0.9.20260711 \
-	BASE_MIN_VERSION=0.9.20260630 \
+	BASE_MIN_VERSION=0.9.20260707 \
 	BSH=/usr/local/bin/base.sh
 [ -r "$BSH" ] || {
 	printf >&2 'Install shellbase.\n'
