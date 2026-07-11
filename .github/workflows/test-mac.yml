@@ -7,16 +7,20 @@ name: test-mac
   pull_request:
   push:
     branches: [master]
+  workflow_dispatch:
 permissions:
   contents: read
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+defaults:
+  run:
+    shell: sh
 jobs:
   test-mac:
-    timeout-minutes: 15
     name: Test on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
     strategy:
       fail-fast: false
       matrix:
@@ -30,7 +34,7 @@ jobs:
       - run: |
           rel=0.9.20260707
           srv=https://github.com/rdavid/shellbase/archive/refs/tags
-          brew install goredo
+          brew install dash goredo mksh
           curl --location --silent "$srv/v$rel.tar.gz" |
             tar \
               --directory /usr/local/bin \

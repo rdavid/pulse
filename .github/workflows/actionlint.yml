@@ -9,25 +9,34 @@ name: actionlint
   push:
     branches: [master]
     paths: *paths
+  workflow_dispatch:
 permissions:
   contents: read
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+defaults:
+  run:
+    shell: sh
 jobs:
   actionlint:
-    timeout-minutes: 15
     runs-on: ubuntu-24.04
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v7.0.0
         with:
           persist-credentials: false
       - id: get
         run: |
-          ver=1.7.12
           srv=https://raw.githubusercontent.com/rhysd/actionlint
-          srv="$srv/v$ver/scripts/download-actionlint.bash"
-          bash <(curl --silent "$srv") "$ver"
+          ver=1.7.12
+          curl \
+            --fail \
+            --location \
+            --silent \
+            --show-error \
+            "$srv/v$ver/scripts/download-actionlint.bash" |
+            bash -s "$ver"
       - env:
-          EXE: ${{ steps.get.outputs.executable }}
-        run: "$EXE"
+          exe: ${{ steps.get.outputs.executable }}
+        run: "$exe"
