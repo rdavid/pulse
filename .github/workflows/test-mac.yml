@@ -5,8 +5,13 @@
 name: test-mac
 'on':
   pull_request:
+    paths: &paths
+      - '*.do'
+      - client/client
+      - server/server
   push:
     branches: [master]
+    paths: *paths
   workflow_dispatch:
 permissions:
   contents: read
@@ -26,7 +31,10 @@ jobs:
       matrix:
         os:
           - macos-14
+          - macos-15
           - macos-15-intel
+          - macos-26
+          - macos-26-intel
     steps:
       - uses: actions/checkout@v7.0.1
         with:

@@ -39,8 +39,9 @@ jobs:
         with:
           persist-credentials: false
       - run: |
-          sudo apt update
-          sudo apt install --yes podman python3-pip
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends --yes \
+            podman python3-pip
           pip3 install --user podman-compose
           mkdir -p dat
           chmod a+w dat
