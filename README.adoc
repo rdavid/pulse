@@ -9,7 +9,7 @@
 :img-releases: https://img.shields.io/github/v/release/rdavid/pulse?color=blue&label=%20&logo=semver&logoColor=white&style=flat
 :img-test-lnx: https://github.com/rdavid/pulse/actions/workflows/test-lnx.yml/badge.svg
 :img-test-mac: https://github.com/rdavid/pulse/actions/workflows/test-mac.yml/badge.svg
-:url-actionlint: https://github.com/rhysd/actionlint
+:url-actionlint: https://rhysd.github.io/actionlint/
 :url-build: https://github.com/rdavid/pulse/actions/workflows/build.yml
 :url-cv: http://cv.rabkin.co.il
 :url-goredo: http://www.goredo.stargrave.org/INSTALL.html
@@ -18,15 +18,15 @@
 :url-license: https://github.com/rdavid/pulse/blob/master/LICENSES/0BSD.txt
 :url-redo: http://cr.yp.to/redo.html
 :url-releases: https://github.com/rdavid/pulse/releases
-:url-reuse: https://github.com/fsfe/reuse-action
+:url-reuse: https://reuse.software/
 :url-shellbase: https://github.com/rdavid/shellbase
-:url-shellcheck: https://github.com/koalaman/shellcheck
-:url-shfmt: https://github.com/mvdan/sh
+:url-shellcheck: https://www.shellcheck.net/
+:url-shfmt: https://pkg.go.dev/mvdan.cc/sh/v3/cmd/shfmt
 :url-test-lnx: https://github.com/rdavid/pulse/actions/workflows/test-lnx.yml
 :url-test-mac: https://github.com/rdavid/pulse/actions/workflows/test-mac.yml
 :url-typos: https://github.com/crate-ci/typos
-:url-yamllint: https://github.com/adrienverge/yamllint
-:url-zizmor: https://github.com/zizmorcore/zizmor
+:url-yamllint: https://yamllint.readthedocs.io/
+:url-zizmor: https://docs.zizmor.sh/
 
 = Pulse
 
