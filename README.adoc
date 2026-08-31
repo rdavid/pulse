@@ -77,7 +77,7 @@ The server stores the received data in a database.
 After every five status updates, the server sends a kill signal to restart
 the client service.
 
-== Build and Start
+== Start
 
 To build and start the containers with Podman Compose:
 
