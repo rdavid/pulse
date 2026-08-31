@@ -19,12 +19,12 @@
 :url-redo: http://cr.yp.to/redo.html
 :url-releases: https://github.com/rdavid/pulse/releases
 :url-reuse: https://reuse.software/
-:url-shellbase: https://github.com/rdavid/shellbase
+:url-shellbase: https://rdavid.github.io/shellbase/
 :url-shellcheck: https://www.shellcheck.net/
 :url-shfmt: https://pkg.go.dev/mvdan.cc/sh/v3/cmd/shfmt
 :url-test-lnx: https://github.com/rdavid/pulse/actions/workflows/test-lnx.yml
 :url-test-mac: https://github.com/rdavid/pulse/actions/workflows/test-mac.yml
-:url-typos: https://github.com/crate-ci/typos
+:url-typos: https://docs.rs/crate/typos-cli/latest
 :url-yamllint: https://yamllint.readthedocs.io/
 :url-zizmor: https://docs.zizmor.sh/
 
