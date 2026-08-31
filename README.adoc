@@ -58,12 +58,11 @@ endif::[]
 
 == About
 
-Pulse is a client-server network communication project.
+`pulse` is a client-server network communication project.
 A containerized client collects monitoring data and reports it to a
 containerized server.
-Both are POSIX-compliant shell
-(Portable Operating System Interface for uniX) scripts built on the Unix
-shell framework {url-shellbase}[`shellbase`].
+Both follow POSIX, the Portable Operating System Interface standard, and
+are shell scripts built on the {url-shellbase}[`shellbase`] framework.
 
 == Objectives
 
@@ -79,7 +78,7 @@ the client service.
 
 == Start
 
-To build and start the containers with Podman Compose:
+Build and start the containers with Podman Compose:
 
 [,sh]
 ----
@@ -98,7 +97,7 @@ podman machine stop
 
 == Test
 
-The project uses Daniel J. Bernstein's build system {url-redo}[`redo`].
+The project uses Daniel J. Bernstein's build system, {url-redo}[`redo`].
 You can install Sergey Matveev's {url-goredo}[`goredo`] implementation.
 `redo lint` applies the following linters to the source files:
 {url-actionlint}[`actionlint`],
