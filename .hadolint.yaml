@@ -1,0 +1,12 @@
+# SPDX-FileCopyrightText: 2026 David Rabkin
+# SPDX-License-Identifier: 0BSD
+#
+# Ignores DL3066: both Containerfiles keep their named USER directive for
+# readability. Alpine ships /etc/passwd, so the name resolves at runtime.
+#
+# Ignores DL4006: both Containerfiles pipe curl into tar under alpine's
+# ash, which lacks the pipefail option this rule expects.
+---
+ignored:
+  - DL3066
+  - DL4006

@@ -8,11 +8,9 @@ ENV \
 	TZ=Asia/Jerusalem \
 	USER=server
 COPY LICENSES/* /licenses/
-
-# hadolint ignore=DL4006
 RUN \
 	apk add --no-cache --update \
-		curl~=8.20 \
+		curl~=8.22 \
 		iproute2~=6.17 \
 		netcat-openbsd~=1.234 \
 		tzdata~=2026 \
