@@ -5,7 +5,7 @@
 // URLs:
 :img-build: https://img.shields.io/github/actions/workflow/status/rdavid/pulse/build.yml?branch=master&color=7f9f7f&label=build&labelColor=555555&logo=github&logoColor=dcdccc&style=flat
 :img-hoc: https://hitsofcode.com/github/rdavid/pulse?branch=master&label=hits%20of%20code
-:img-license: https://img.shields.io/github/license/rdavid/pulse?color=94bff3&labelColor=555555&logo=freebsd&logoColor=dcdccc&style=flat
+:img-license: https://img.shields.io/github/license/rdavid/pulse?color=94bff3&labelColor=555555&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI%2BPHRleHQgeD0iMTIiIHk9IjIwIiBmb250LWZhbWlseT0iSGVsdmV0aWNhLEFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNkY2RjY2MiPiYjMTY5OzwvdGV4dD48L3N2Zz4%3D&style=flat
 :img-releases: https://img.shields.io/github/v/release/rdavid/pulse?color=dfaf8f&label=%20&labelColor=555555&logo=semver&logoColor=dcdccc&style=flat
 :img-test-lnx: https://img.shields.io/github/actions/workflow/status/rdavid/pulse/test-lnx.yml?branch=master&color=8cd0d3&label=lnx&labelColor=555555&logo=linux&logoColor=dcdccc&style=flat
 :img-test-mac: https://img.shields.io/github/actions/workflow/status/rdavid/pulse/test-mac.yml?branch=master&color=f0dfaf&label=mac&labelColor=555555&logo=apple&logoColor=dcdccc&style=flat
@@ -36,8 +36,8 @@
 <a href="{url-build}"><img src="{img-build}" alt="build"></a>
 <a href="{url-test-lnx}"><img src="{img-test-lnx}" alt="test lnx"></a>
 <a href="{url-test-mac}"><img src="{img-test-mac}" alt="test mac"></a>
-<a href="{url-hoc}"><img src="{img-hoc}" alt="hits of code"></a>
 <a href="{url-releases}"><img src="{img-releases}" alt="release"></a>
+<a href="{url-hoc}"><img src="{img-hoc}" alt="hits of code"></a>
 <a href="{url-license}"><img src="{img-license}" alt="license"></a>
 </div>
 ++++
