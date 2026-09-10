@@ -1,5 +1,14 @@
 # SPDX-FileCopyrightText: 2025-2026 David Rabkin
 # SPDX-License-Identifier: 0BSD
+#
+# Each Trivy scan runs against its pushed digest rather than a local
+# image: buildx keeps a multi-platform build out of the local Docker
+# store, so there is nothing to load and scan before the push. The
+# ignore-unfixed flag skips base-image CVEs with no available patch,
+# which would otherwise fail every run for issues nobody can act on.
+# The release step runs last so a failed scan blocks it, and it
+# publishes against the tag that triggered the workflow with an
+# auto-generated changelog body.
 ---
 name: publish
 'on':
@@ -7,7 +16,7 @@ name: publish
     tags:
       - v*
 permissions:
-  contents: read
+  contents: write
   packages: write
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -50,6 +59,7 @@ jobs:
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}},priority=901
       - uses: docker/build-push-action@v7.3.0
+        id: build-client
         with:
           context: .
           file: client/Containerfile
@@ -57,6 +67,14 @@ jobs:
           platforms: linux/amd64,linux/arm/v7,linux/arm64
           push: true
           tags: ${{ steps.meta-client.outputs.tags }}
+      - uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          exit-code: '1'
+          ignore-unfixed: true
+          image-ref: "\
+            ${{ env.REGISTRY }}/${{ env.CLIENT }}\
+            @${{ steps.build-client.outputs.digest }}"
+          severity: CRITICAL,HIGH
       - uses: docker/metadata-action@v6.2.0
         id: meta-server
         with:
@@ -73,6 +91,7 @@ jobs:
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}},priority=901
       - uses: docker/build-push-action@v7.3.0
+        id: build-server
         with:
           context: .
           file: server/Containerfile
@@ -80,3 +99,14 @@ jobs:
           platforms: linux/amd64,linux/arm/v7,linux/arm64
           push: true
           tags: ${{ steps.meta-server.outputs.tags }}
+      - uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          exit-code: '1'
+          ignore-unfixed: true
+          image-ref: "\
+            ${{ env.REGISTRY }}/${{ env.SERVER }}\
+            @${{ steps.build-server.outputs.digest }}"
+          severity: CRITICAL,HIGH
+      - env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release create "$GITHUB_REF_NAME" --generate-notes

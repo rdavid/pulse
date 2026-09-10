@@ -12,6 +12,8 @@ RUN \
 	apk add --no-cache --update \
 		curl~=8.22 \
 		iproute2~=7.0 \
+		libcrypto3=3.5.8-r0 \
+		libssl3=3.5.8-r0 \
 		netcat-openbsd~=1.234 \
 		tzdata~=2026 \
 	&& rm -rf /var/cache/apk/* \
