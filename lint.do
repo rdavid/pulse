@@ -14,8 +14,10 @@
 # Variable appears unused and file not following:
 #  shellcheck disable=SC2034,SC1090
 redo-ifchange \
+	./.conform.yaml \
 	./.github/*.yml \
 	./.github/workflows/*.yml \
+	./.hadolint.yaml \
 	./*.do \
 	./client/client \
 	./client/Containerfile \
@@ -33,6 +35,7 @@ readonly \
 }
 . "$BSH"
 cmd_runif actionlint
+cmd_runif conform enforce --commit-ref HEAD
 for f in ./*.do ./client/client ./server/server; do
 	cmd_runif dash -n "$f"
 	cmd_runif mksh -n "$f"
@@ -51,8 +54,10 @@ cmd_runif shfmt -d \
 	./server/server
 cmd_runif typos
 cmd_runif yamllint \
+	./.conform.yaml \
 	./.github/*.yml \
 	./.github/workflows/*.yml \
+	./.hadolint.yaml \
 	./*.yml
 cmd_runif zizmor --offline ./.github/
 printf OK

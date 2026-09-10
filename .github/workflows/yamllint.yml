@@ -30,6 +30,7 @@ jobs:
       - uses: ibiqlik/action-yamllint@v3.1.1
         with:
           file_or_dir: >
+            ./.conform.yaml
             ./.github/*.yml
             ./.github/workflows/*.yml
             ./.hadolint.yaml
