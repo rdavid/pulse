@@ -64,7 +64,7 @@ containerized server.
 Both follow POSIX, the Portable Operating System Interface standard, and
 are shell scripts built on the {url-shellbase}[`shellbase`] framework.
 
-== Objectives
+== Description
 
 Both the client and the server run on the `alpine` base image.
 Every five seconds the client sends the following data to the server:
@@ -76,7 +76,7 @@ The server stores the received data in a database.
 After every five status updates, the server sends a kill signal to restart
 the client service.
 
-== Start
+== Usage
 
 Build and start the containers with Podman Compose:
 
