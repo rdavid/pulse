@@ -1,6 +1,6 @@
 # SPDX-FileCopyrightText: 2025-2026 David Rabkin
 # SPDX-License-Identifier: 0BSD
-FROM alpine:3.23.4
+FROM alpine:3.24.1
 LABEL maintainer=David\ Rabkin\ <david@rabkin.co.il>
 ENV \
 	BASE_REL=0.9.20260707 \
@@ -11,7 +11,7 @@ COPY LICENSES/* /licenses/
 RUN \
 	apk add --no-cache --update \
 		curl~=8.22 \
-		iproute2~=6.17 \
+		iproute2~=7.0 \
 		netcat-openbsd~=1.234 \
 		tzdata~=2026 \
 	&& rm -rf /var/cache/apk/* \
