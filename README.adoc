@@ -58,8 +58,8 @@ endif::[]
 
 == About
 
-`pulse` is a client-server network communication project.
-A containerized client collects monitoring data and reports it to a
+`pulse` is a client-server host-monitoring project.
+A containerized client collects host metrics and reports them to a
 containerized server.
 Both follow POSIX, the Portable Operating System Interface standard, and
 are shell scripts built on the {url-shellbase}[`shellbase`] framework.
