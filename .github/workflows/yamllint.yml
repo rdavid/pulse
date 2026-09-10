@@ -32,5 +32,6 @@ jobs:
           file_or_dir: >
             ./.github/*.yml
             ./.github/workflows/*.yml
+            ./.hadolint.yaml
             ./*.yml
           strict: true

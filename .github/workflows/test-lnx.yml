@@ -9,6 +9,7 @@ name: test-lnx
 'on':
   pull_request:
     paths: &paths
+      - .github/workflows/test-lnx.yml
       - client/**
       - server/**
       - podman-compose-test.yml

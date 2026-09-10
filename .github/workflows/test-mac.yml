@@ -7,6 +7,7 @@ name: test-mac
   pull_request:
     paths: &paths
       - '*.do'
+      - .github/workflows/test-mac.yml
       - client/client
       - server/server
   push:

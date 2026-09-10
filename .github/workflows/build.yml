@@ -5,6 +5,7 @@ name: build
 'on':
   pull_request:
     paths: &paths
+      - .github/workflows/build.yml
       - client/**
       - server/**
   push:
@@ -21,7 +22,7 @@ defaults:
     shell: sh
 jobs:
   build:
-    name: Test on ${{ matrix.os }}
+    name: Build on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     timeout-minutes: 15
     strategy:
