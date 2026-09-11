@@ -27,7 +27,7 @@ RUN \
 			--gzip \
 			--strip-components=2 \
 			shellbase-"$BASE_REL"/lib/base.sh
-USER "$USER"
+USER 1001
 WORKDIR /home/"$USER"
 COPY \
 	--chown="$USER":"$USER" \
