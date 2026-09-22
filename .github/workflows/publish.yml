@@ -58,7 +58,7 @@ jobs:
             type=raw,value=latest
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}},priority=901
-      - uses: docker/build-push-action@v7.3.0
+      - uses: docker/build-push-action@v7.4.0
         id: build-client
         with:
           context: .
@@ -90,7 +90,7 @@ jobs:
             type=raw,value=latest
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}},priority=901
-      - uses: docker/build-push-action@v7.3.0
+      - uses: docker/build-push-action@v7.4.0
         id: build-server
         with:
           context: .
