@@ -4,29 +4,34 @@ FROM alpine:3.24.1
 LABEL maintainer=David\ Rabkin\ <david@rabkin.co.il>
 ENV \
 	BASE_REL=0.9.20260707 \
-	BASE_SRC=https://github.com/rdavid/shellbase/archive/refs/tags/v0.9.20260707.tar.gz \
+	BASE_SRC=https://github.com/rdavid/shellbase/archive/refs/tags \
 	TZ=Asia/Jerusalem \
 	USER=client
-COPY LICENSES/* /licenses/
 RUN \
-	apk add --no-cache --update \
+	apk add --no-cache \
 		curl~=8.22 \
 		iproute2~=7.0 \
 		libcrypto3=3.5.9-r0 \
 		libssl3=3.5.9-r0 \
 		netcat-openbsd~=1.234 \
 		tzdata~=2026 \
-	&& rm -rf /var/cache/apk/* \
 	&& adduser -D -u 1001 "$USER" "$USER" \
 	&& cp /usr/share/zoneinfo/"$TZ" /etc/localtime \
 	&& printf %s "$TZ" > /etc/timezone \
-	&& curl --location --silent "$BASE_SRC" | \
+	&& curl \
+		--fail \
+		--location \
+		--retry 3 \
+		--show-error \
+		--silent \
+		"$BASE_SRC/v$BASE_REL.tar.gz" | \
 		tar \
 			--directory /usr/local/bin \
 			--extract \
 			--gzip \
 			--strip-components=2 \
 			shellbase-"$BASE_REL"/lib/base.sh
+COPY LICENSES/* /licenses/
 USER 1001
 WORKDIR /home/"$USER"
 COPY \
