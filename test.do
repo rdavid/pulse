@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: 0BSD
 #
 # Builds the images and runs the round-trip test with podman-compose.
-# Starts the podman VM when needed and stops it afterwards. Command output
+# Starts the Podman VM when needed and stops it afterwards. Command output
 # streams to the console through the shellbase loggers, while the script
 # itself prints only OK to stdout, which redo captures as the target.
 #

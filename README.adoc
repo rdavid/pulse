@@ -70,11 +70,11 @@ Both the client and the server run on the `alpine` base image.
 Every five seconds the client sends the following data to the server:
 
 * Host uptime
-* Host network interface names and IP addresses
+* Host network interface names and IPv4 addresses
 
 The server stores the received data in a database.
-After every five status updates, the server sends a kill signal to restart
-the client service.
+After every fifth update, the server sends the client a die message.
+The client then terminates, and the container runtime restarts it.
 
 == Usage
 
@@ -82,16 +82,16 @@ Build and start the containers with Podman Compose:
 
 [,sh]
 ----
-# Starts VM.
+# Starts the Podman VM.
 podman machine start
 
-# Builds both images and starts containers.
+# Builds both images and starts the containers.
 podman-compose up --build
 
-# Stops and removes containers.
+# Stops and removes the containers.
 podman-compose down
 
-# Stops VM.
+# Stops the Podman VM.
 podman machine stop
 ----
 
@@ -115,7 +115,7 @@ project's target shells do not accept.
 
 == License
 
-`pulse` belongs to {url-cv}[David Rabkin] and uses a
+`pulse` belongs to {url-cv}[David Rabkin] and is licensed under the
 {url-license}[Zero-Clause BSD license].
 
 ifdef::pages-build[]
