@@ -3,13 +3,14 @@
 # SPDX-FileCopyrightText: 2025-2026 David Rabkin
 # SPDX-License-Identifier: 0BSD
 #
-# The script uses local variables which are not POSIX but supported by most
-# shells. See:
+# The script uses local variables. They are not POSIX but most shells support
+# them. See:
 #  https://stackoverflow.com/q/18597697
-# Local variables, file not following, variable unused:
+# Silences the warnings about local variables, the unfollowed source, and
+# unused variables:
 #  shellcheck disable=SC1091,SC2034,SC3043
 readonly \
-	BASE_APP_VERSION=0.9.20260711 \
+	BASE_APP_VERSION=0.9.20261011 \
 	CLIENT_HOST="${CLIENT_HOST:-client}" \
 	CLIENT_PORT="${CLIENT_PORT:-9090}" \
 	DBFILE="${DBFILE:-dat/db}" \

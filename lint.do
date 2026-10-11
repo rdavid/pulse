@@ -11,7 +11,7 @@
 # hands any further operands to it as positional parameters, so files after
 # the first would be silently skipped rather than checked.
 #
-# Variable appears unused and file not following:
+# Silences the warnings about unused variables and unfollowed sources:
 #  shellcheck disable=SC2034,SC1090
 redo-ifchange \
 	./.conform.yaml \
@@ -26,7 +26,7 @@ redo-ifchange \
 	./*.yml \
 	./README.adoc
 readonly \
-	BASE_APP_VERSION=0.9.20260711 \
+	BASE_APP_VERSION=0.9.20261011 \
 	BASE_MIN_VERSION=0.9.20260707 \
 	BSH=/usr/local/bin/base.sh
 [ -r "$BSH" ] || {

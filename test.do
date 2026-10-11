@@ -8,7 +8,7 @@
 # streams to the console through the shellbase loggers, while the script
 # itself prints only OK to stdout, which redo captures as the target.
 #
-# Variable appears unused and file not following:
+# Silences the warnings about unused variables and unfollowed sources:
 #  shellcheck disable=SC2034,SC1090
 redo-ifchange \
 	./client/client \
@@ -17,7 +17,7 @@ redo-ifchange \
 	./server/Containerfile \
 	./*.yml
 readonly \
-	BASE_APP_VERSION=0.9.20260711 \
+	BASE_APP_VERSION=0.9.20261011 \
 	BASE_MIN_VERSION=0.9.20260707 \
 	BSH=/usr/local/bin/base.sh
 [ -r "$BSH" ] || {
