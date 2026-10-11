@@ -16,6 +16,7 @@
 :url-hadolint: https://github.com/hadolint/hadolint
 :url-hoc: https://hitsofcode.com/view/github/rdavid/pulse?branch=master
 :url-license: https://github.com/rdavid/pulse/blob/master/LICENSES/0BSD.txt
+:url-pages: https://rdavid.github.io/pulse/
 :url-redo: http://cr.yp.to/redo.html
 :url-releases: https://github.com/rdavid/pulse/releases
 :url-reuse: https://reuse.software/
@@ -63,6 +64,9 @@ A containerized client collects host metrics and reports them to a
 containerized server.
 Both follow POSIX, the Portable Operating System Interface standard, and
 are shell scripts built on the {url-shellbase}[`shellbase`] framework.
+ifndef::pages-build[]
+The project also has a {url-pages}[website].
+endif::[]
 
 == Description
 
