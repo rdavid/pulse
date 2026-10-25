@@ -1,12 +1,13 @@
-# SPDX-FileCopyrightText: 2025 David Rabkin
+# SPDX-FileCopyrightText: 2025-2026 David Rabkin
 # SPDX-License-Identifier: 0BSD
 ---
-version: 3.9
 services:
   client:
     build:
       context: .
       dockerfile: client/Containerfile
+    cap_drop:
+      - ALL
     depends_on:
       - server
     environment:
@@ -18,10 +19,14 @@ services:
     ports:
       - 9090:9090
     restart: 'no'
+    security_opt:
+      - no-new-privileges:true
   server:
     build:
       context: .
       dockerfile: server/Containerfile
+    cap_drop:
+      - ALL
     environment:
       - DBFILE=dat/db
       - CLIENT_HOST=client
@@ -32,6 +37,8 @@ services:
     ports:
       - 8080:8080
     restart: 'no'
+    security_opt:
+      - no-new-privileges:true
     user: 1001:1001
     volumes:
       - ./dat:/home/server/dat
