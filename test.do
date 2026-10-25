@@ -8,8 +8,8 @@
 # streams to the console through the shellbase loggers, while the script
 # itself prints only OK to stdout, which redo captures as the target.
 #
-# Silences the warnings about unused variables and unfollowed sources:
-#  shellcheck disable=SC2034,SC1090
+# Shellcheck cannot follow the sourced file or see variables it reads:
+#  shellcheck disable=SC1091,SC2034
 redo-ifchange \
 	./client/client \
 	./client/Containerfile \
@@ -17,14 +17,9 @@ redo-ifchange \
 	./server/Containerfile \
 	./*.yml
 readonly \
-	BASE_APP_VERSION=0.9.20261011 \
-	BASE_MIN_VERSION=0.9.20260707 \
-	BSH=/usr/local/bin/base.sh
-[ -r "$BSH" ] || {
-	printf >&2 'Install shellbase.\n'
-	exit 1
-}
-. "$BSH"
+	BASE_APP_VERSION=0.9.20261026 \
+	BASE_MIN_VERSION=0.9.20260707
+. base.sh
 STP=true
 cmd_run podman machine start || {
 	[ $? = 125 ] || die

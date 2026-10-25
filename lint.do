@@ -11,8 +11,8 @@
 # hands any further operands to it as positional parameters, so files after
 # the first would be silently skipped rather than checked.
 #
-# Silences the warnings about unused variables and unfollowed sources:
-#  shellcheck disable=SC2034,SC1090
+# Shellcheck cannot follow the sourced file or see variables it reads:
+#  shellcheck disable=SC1091,SC2034
 redo-ifchange \
 	./.conform.yaml \
 	./.github/*.yml \
@@ -26,20 +26,20 @@ redo-ifchange \
 	./*.yml \
 	./README.adoc
 readonly \
-	BASE_APP_VERSION=0.9.20261011 \
-	BASE_MIN_VERSION=0.9.20260707 \
-	BSH=/usr/local/bin/base.sh
-[ -r "$BSH" ] || {
-	printf >&2 'Install shellbase.\n'
-	exit 1
-}
-. "$BSH"
+	BASE_APP_VERSION=0.9.20261026 \
+	BASE_MIN_VERSION=0.9.20260707
+. base.sh
 cmd_runif actionlint
+cmd_runif checkbashisms \
+	./*.do \
+	./client/client \
+	./server/server
 cmd_runif conform enforce --commit-ref HEAD
 for f in ./*.do ./client/client ./server/server; do
 	cmd_runif dash -n "$f"
 	cmd_runif mksh -n "$f"
 done
+cmd_runif gitleaks detect --no-banner --redact
 cmd_runif hadolint \
 	./client/Containerfile \
 	./server/Containerfile
