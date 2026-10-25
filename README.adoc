@@ -11,7 +11,10 @@
 :img-test-mac: https://img.shields.io/github/actions/workflow/status/rdavid/pulse/test-mac.yml?branch=master&color=f0dfaf&label=mac&labelColor=555555&logo=apple&logoColor=dcdccc&style=flat
 :url-actionlint: https://rhysd.github.io/actionlint/
 :url-build: https://github.com/rdavid/pulse/actions/workflows/build.yml
+:url-checkbashisms: https://manpages.debian.org/unstable/devscripts/checkbashisms.1.en.html
+:url-conform: https://github.com/siderolabs/conform
 :url-cv: http://cv.rabkin.co.il
+:url-gitleaks: https://gitleaks.io
 :url-goredo: http://www.goredo.stargrave.org/INSTALL.html
 :url-hadolint: https://github.com/hadolint/hadolint
 :url-hoc: https://hitsofcode.com/view/github/rdavid/pulse?branch=master
@@ -107,6 +110,9 @@ You can install Sergey Matveev's {url-goredo}[`goredo`] implementation.
 Compose.
 `redo lint` applies the following linters to the source files:
 {url-actionlint}[`actionlint`],
+{url-checkbashisms}[`checkbashisms`],
+{url-conform}[`conform`],
+{url-gitleaks}[`gitleaks`],
 {url-hadolint}[`hadolint`],
 {url-reuse}[`reuse`],
 {url-shellcheck}[`shellcheck`],
