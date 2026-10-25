@@ -3,10 +3,14 @@
 # SPDX-FileCopyrightText: 2025-2026 David Rabkin
 # SPDX-License-Identifier: 0BSD
 #
-# Builds the images and runs the round-trip test with podman-compose.
-# Starts the Podman VM when needed and stops it afterwards. Command output
-# streams to the console through the shellbase loggers, while the script
-# itself prints only OK to stdout, which redo captures as the target.
+# Builds the images and runs the round-trip test with podman-compose. The
+# variable STP tracks whether the script started the Podman VM and should
+# stop it on exit. Exit code 125 from podman machine start means the VM is
+# already running or is still starting up. The script closes the redo
+# jobserver descriptors 3 and 4 for podman machine start, so the VM daemon
+# does not inherit them and stall redo. Command output streams to the
+# console through the shellbase loggers, while the script itself prints only
+# OK to stdout, which redo captures as the target.
 #
 # Shellcheck cannot follow the sourced file or see variables it reads:
 #  shellcheck disable=SC1091,SC2034
@@ -21,9 +25,9 @@ readonly \
 	BASE_MIN_VERSION=0.9.20260707
 . base.sh
 STP=true
-cmd_run podman machine start || {
+cmd_run sh -c 'podman machine start 3>&- 4>&-' || {
 	[ $? = 125 ] || die
-	log VM already running or starting.
+	log Podman VM is already running.
 	STP=false
 }
 mkdir -p ./dat
