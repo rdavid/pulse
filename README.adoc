@@ -16,7 +16,7 @@
 :url-cv: http://cv.rabkin.co.il
 :url-gitleaks: https://gitleaks.io
 :url-goredo: http://www.goredo.stargrave.org/INSTALL.html
-:url-hadolint: https://github.com/hadolint/hadolint
+:url-hadolint: https://hadolint.github.io/hadolint/
 :url-hoc: https://hitsofcode.com/view/github/rdavid/pulse?branch=master
 :url-license: https://github.com/rdavid/pulse/blob/master/LICENSES/0BSD.txt
 :url-pages: https://rdavid.github.io/pulse/
