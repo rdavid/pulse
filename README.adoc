@@ -62,38 +62,38 @@ endif::[]
 
 == About
 
-`pulse` is a client-server host-monitoring project.
-A containerized client collects host metrics and reports them to a
-containerized server.
+`pulse` is a Unix shell client-server host monitor.
+The client and the server run in containers on the `alpine` base image.
 Both follow POSIX, the Portable Operating System Interface standard, and
-are shell scripts built on the {url-shellbase}[`shellbase`] framework.
-ifndef::pages-build[]
-The project also has a {url-pages}[website].
-endif::[]
-
-== Description
-
-Both the client and the server run on the `alpine` base image.
+are built on the {url-shellbase}[`shellbase`] framework.
 Every five seconds the client sends the following data to the server:
 
 * Host uptime
 * Host network interface names and IPv4 addresses
 
-The server stores the received data in a database.
+The server prepends a timestamp to each report and appends it to
+`dat/db`.
 After every fifth update, the server sends the client a die message.
 The client then terminates, and the container runtime restarts it.
+ifndef::pages-build[]
+The project also has a {url-pages}[website].
+endif::[]
 
 == Usage
 
-Build and start the containers with Podman Compose:
+Build and start the containers with Podman Compose.
+The server listens on port 8080 and the client on port 9090.
 
 [,sh]
 ----
 # Starts the Podman VM.
 podman machine start
 
-# Builds both images and starts the containers.
-podman-compose up --build
+# Builds both images and starts the containers in the background.
+podman-compose up --build --detach
+
+# Follows the reports as the server stores them.
+tail -f dat/db
 
 # Stops and removes the containers.
 podman-compose down
